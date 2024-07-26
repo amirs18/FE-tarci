@@ -9,7 +9,7 @@ export default function App() {
   const { data, isLoading } = useNaics();
 
   return (
-    <div className="grid grid-cols-1 items-center gap-4  m-11 ">
+    <div className="grid grid-cols-1 justify-items-center gap-4  m-11 ">
       {isLoading && <Loading />}
       {data && <NAICSAutoCompleate data={data.data.list} setValue={setValue} />}
       {value && <SMBSData naicsCode={value} />}

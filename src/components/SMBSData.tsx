@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { useSMBS } from "../apiHooks/useSMBS";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import Loading from "./Loading";
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "name", width: 250 },
@@ -22,12 +23,15 @@ function SMBSData({ naicsCode }: { naicsCode: number | undefined }) {
 
   return (
     <div style={{ height: 370 }}>
-      <DataGrid
-        columns={columns}
-        rows={rows}
-        getRowId={(row) => row.name + row.country}
-        autoPageSize={true}
-      />
+      {isLoading && <Loading />}
+      {data && (
+        <DataGrid
+          columns={columns}
+          rows={rows}
+          getRowId={(row) => row.name + row.country}
+          autoPageSize={true}
+        />
+      )}
     </div>
   );
 }
