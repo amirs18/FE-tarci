@@ -15,7 +15,7 @@ function SMBSData({ naicsCode }: { naicsCode: number | undefined }) {
     return {
       ...d,
       industries: d.industries.reduce(
-        (acc, cur, i) => (acc += cur.name + ", "),
+        (acc, cur) => (acc += cur.name + ", "),
         ""
       ),
     };
