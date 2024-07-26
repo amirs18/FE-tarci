@@ -22,7 +22,7 @@ function NAICSAutoCompleate({
   setValue,
 }: {
   data: Entity[];
-  setValue: React.Dispatch<React.SetStateAction<number>>;
+  setValue: React.Dispatch<React.SetStateAction<number | undefined>>;
 }) {
   const options = data.map((option) => {
     const firstLetter = option.name[0].toUpperCase();
@@ -53,7 +53,7 @@ function NAICSAutoCompleate({
             if (newValue) {
               setValue(newValue.code);
             } else {
-              setValue(-1);
+              setValue(undefined);
             }
           }}
         />

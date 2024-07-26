@@ -2,17 +2,17 @@ import { useNaics } from "./apiHooks/useNAICS";
 import Loading from "./components/Loading";
 import NAICSAutoCompleate from "./components/NAICSAutoCompleate";
 import { Suspense, useState } from "react";
+import SMBSData from "./components/SMBSData";
 
 export default function App() {
-  const [value, setValue] = useState<number>(-1);
-  console.log("🚀 ~ App ~ value:", value);
+  const [value, setValue] = useState<number | undefined>();
   const { data, isLoading } = useNaics();
 
   return (
-    <div className="flex flex-col  items-center  ">
+    <div className="grid grid-cols-1 items-center gap-4  m-11 ">
       {isLoading && <Loading />}
       {data && <NAICSAutoCompleate data={data.data.list} setValue={setValue} />}
-      {value !== -1 && <>{value}</>}
+      {value && <SMBSData naicsCode={value} />}
     </div>
   );
 }
