@@ -6,12 +6,7 @@ const columns: GridColDef[] = [
   { field: "name", headerName: "name", width: 250 },
   { field: "country", headerName: "country", width: 250 },
 ];
-function digestMessage(message: string) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(message);
-  const hash = window.crypto.subtle.digest("SHA-256", data);
-  return hash;
-}
+
 function SMBSData({ naicsCode }: { naicsCode: number | undefined }) {
   const { data, isLoading } = useSMBS(naicsCode);
 
