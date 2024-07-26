@@ -1,30 +1,18 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useNaics } from "./apiHooks/useNAICS";
+import Loading from "./components/Loading";
+import NAICSAutoCompleate from "./components/NAICSAutoCompleate";
+import { Suspense, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0);
+export default function App() {
+  const [value, setValue] = useState<number>(-1);
+  console.log("🚀 ~ App ~ value:", value);
+  const { data, isLoading } = useNaics();
 
   return (
-    <div className="flex flex-col  items-center ">
-      <div className="flex justify-center">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <button className="btn" onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </button>
-      <p>
-        Edit <code>src/App.tsx</code> and save to test HMR
-      </p>
-      <p>Click on the Vite and React logos to learn more</p>
+    <div className="flex flex-col  items-center  ">
+      {isLoading && <Loading />}
+      {data && <NAICSAutoCompleate data={data.data.list} setValue={setValue} />}
+      {value !== -1 && <>{value}</>}
     </div>
   );
 }
-
-export default App;
